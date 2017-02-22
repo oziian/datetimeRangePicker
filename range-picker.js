@@ -35,7 +35,7 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                 minutes = (input - (hours * 60)) < 10 ? '0' + (input - (hours * 60)) : input - (hours * 60),
                 meridian = type ? ':00' : ( hours >= 12 && hours !== 24 ? ' pm' : ' am' );
 
-            return (!type && hours > 12 ? (hours === 24 ? '00' : (hours - 12 < 10 ? '0': '' ) + (hours - 12) ) : (hours < 10 ? '0' : '') + hours) + ':' + minutes + meridian;
+            return (!type && (hours > 12 || hours === 0) ? ((hours === 24 || hours === 0) ? '12' : (hours - 12 < 10 ? '0': '' ) + (hours - 12) ) : (hours < 10 ? '0' : '') + hours) + ':' + minutes + meridian;
         };
     }])
     .directive('rgRangePicker', [ '$compile', '$timeout', '$filter', function ($compile, $timeout, $filter) {
